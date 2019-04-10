@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.model.Utilitarian;
 import org.junit.Test;
-import org.powermock.api.mockito.PowerMockito;
+import java.io.PrintStream;
 import java.util.Scanner;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,20 +25,13 @@ public class UtilitarianTest {
     @Test
     public void givenWantToShowIAMessagenConsoleWhenCallPrintMethodThenShowAMessageInConsole(){
         Utilitarian utilitarian = new Utilitarian();
-        PowerMockito.mockStatic(System.out.getClass());
+        PrintStream outMock = mock(PrintStream.class);
+        utilitarian.setOut(outMock);
         String message = "hola";
-        doNothing().when(System.out).println(message);
 
-        verify(System.out, times(1)).println();
+        utilitarian.print(message);
+
+        verify(outMock, times(1)).println(message);
     }
 
-
-
-    @Test
-    public void givenWantToExitWhenTypeZeroThenExitFromApp(){
-        mock(System.class);
-        Utilitarian utilitarian = new Utilitarian();
-
-        verify(utilitarian, times(1)).exit();
-    }
 }
