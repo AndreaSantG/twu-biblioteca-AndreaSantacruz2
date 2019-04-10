@@ -1,48 +1,43 @@
 package com.twu.biblioteca.model;
 
-public class Movie {
+public class Movie implements ILibraryItem{
 
-    private String name;
-    private int year;
-    private String director;
-    private int rating;
+    private String title;
+    private String author;
+    private int yearPublished;
     private int status;
     private int code;
+    private int rating;
+    private String type;
 
-    public Movie(String name, int year, String director, int rating, int status, int code) {
-        this.name = name;
-        this.year = year;
-        this.director = director;
-        this.rating = rating;
+    public Movie(String title, String author, int yearPublished, int status, int code, int rating) {
+        this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
         this.status = status;
         this.code = code;
+        this.rating = rating;
+        this.type = "movie";
     }
 
-    public String getName() {
-        return this.name;
+    public String getTitle() { return this.title; }
+    public String getAuthor() {
+        return author;
     }
-
-    public int getYearMovie() {
-        return this.year;
+    public int getYearPublished() {
+        return yearPublished;
     }
-
-    public String getDirector() {
-        return this.director;
-    }
-
-    public int getRating() {
-        return this.rating;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
+    public int getStatus() { return this.status; }
+    public int getCode() { return this.code; }
     public void setStatus(int status) {
         this.status = status;
     }
-
-    public int getCode() {
-        return this.code;
+    public int getRating() {
+        return this.rating;
     }
+    public String getType() {
+        return this.type;
+    }
+
+
 }

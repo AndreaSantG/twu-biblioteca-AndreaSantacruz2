@@ -78,11 +78,11 @@ public class LibraryTest {
 
     @Test
     public void givenAVailableBookWhenCheckoutTheBookThenShowSuccessfulMessage(){
-        int codBook = 30;
+        int codeBook = 30;
         String messageCheckedoutBook = "Thank you! Enjoy the book";
         User user = library.getUserList().get(0);
 
-        String resultMessageCheckedoutBook = library.checkoutBook(codBook, user);
+        String resultMessageCheckedoutBook = library.checkoutBook(codeBook, user);
 
         assertThat(messageCheckedoutBook, is(resultMessageCheckedoutBook));
     }
@@ -103,8 +103,11 @@ public class LibraryTest {
         Book book2 = new Book(titleBook2, authorBook2, yearPublishedBook2, statusBook2, idBook2);
         Book book4 = new Book(titleBook4, authorBook4, yearPublishedBook4, statusBook4, idBook4);
         List<Book> bookList = new ArrayList<>(Arrays.asList(book2, book4));
-        library.getBookList().get(30).setStatus(1);
-        library.getBookList().get(50).setStatus(1);
+        int codeCheckedOutBook1 = 30;
+        int codeCheckedOutBook2 = 50;
+        int statusCheckedOut = 1;
+        library.getBookList().get(codeCheckedOutBook1).setStatus(statusCheckedOut);
+        library.getBookList().get(codeCheckedOutBook2).setStatus(statusCheckedOut);
 
         String resultBookList = library.displayBookList();
 
@@ -114,8 +117,10 @@ public class LibraryTest {
 
     @Test
     public void givenAnUnavailableBookWhenCheckoutTheBookThenShowUnsuccessfulMessage(){
-        int codeBook = library.getBookList().get(30).getCode();
-        library.getBookList().get(30).setStatus(1);
+        int codeCheckedOutBook = 30;
+        int statusCheckedOut = 1;
+        int codeBook = library.getBookList().get(codeCheckedOutBook).getCode();
+        library.getBookList().get(codeCheckedOutBook).setStatus(statusCheckedOut);
         String messageCheckedoutUnavailableBook = "Sorry, that book is not available";
         User user = library.getUserList().get(0);
 
@@ -127,8 +132,10 @@ public class LibraryTest {
 
     @Test
     public void givenAValidBookWhenReturnTheBookThenShowSuccessfulMessage(){
-        library.getBookList().get(30).setStatus(1);
-        int codeBook = library.getBookList().get(30).getCode();
+        int codeCheckedOutBook = 30;
+        int statusCheckedOut = 1;
+        library.getBookList().get(codeCheckedOutBook).setStatus(statusCheckedOut);
+        int codeBook = library.getBookList().get(codeCheckedOutBook).getCode();
         String messageReturnBookSuccessfully = "Thank you for returning the book";
 
         String expectedMessageReturnBookSuccessfully = library.returnBook(codeBook);
@@ -150,11 +157,11 @@ public class LibraryTest {
 
     @Test
     public void givenBookDoNotBelongToLibraryWhenReturnTheBookThenShowSuccessfulMessage(){
-        int codBook = 68;
+        int codeBook = 68;
         String expectedMessageOptionCheckoutBook = "That is not a valid book to check out";
         User user = library.getUserList().get(0);
 
-        String resultMessageCheckedoutBook = library.checkoutBook(codBook, user);
+        String resultMessageCheckedoutBook = library.checkoutBook(codeBook, user);
 
         assertThat(expectedMessageOptionCheckoutBook, is(resultMessageCheckedoutBook));
     }
@@ -178,27 +185,33 @@ public class LibraryTest {
         int ratingMovie1 = 9;
         int statusMovie1 = 0;
         int codeMovie1 = 300;
-        Movie movie1 = new Movie(nameMovie1, yearMovie1, directorMovie1, ratingMovie1, statusMovie1, codeMovie1);
+        Movie movie1 = new Movie(nameMovie1, directorMovie1, yearMovie1, statusMovie1, codeMovie1, ratingMovie1);
         String nameMovie2 = "El Rey Leon";
         int yearMovie2 = 1994;
         String directorMovie2 = "Rob Minkoff, Roger Allers";
         int ratingMovie2 = 10;
         int statusMovie2 = 0;
         int codeMovie2 = 400;
-        Movie movie2 = new Movie(nameMovie2, yearMovie2, directorMovie2, ratingMovie2, statusMovie2, codeMovie2);
-        List<Movie> bookList = new ArrayList<>(Arrays.asList(movie1, movie2));
-        library.getMovieList().get(500).setStatus(1);
-        library.getMovieList().get(600).setStatus(1);
+        Movie movie2 = new Movie(nameMovie2, directorMovie2, yearMovie2, statusMovie2, codeMovie2, ratingMovie2);
+        List<Movie> movieList = new ArrayList<>(Arrays.asList(movie1, movie2));
+        int codeCheckedOutMovie1 = 500;
+        int codeCheckedOutMovie2 = 600;
+        int statusCheckedOut = 1;
+        library.getMovieList().get(codeCheckedOutMovie1).setStatus(statusCheckedOut);
+        library.getMovieList().get(codeCheckedOutMovie2).setStatus(statusCheckedOut);
 
         String resultBookList = library.displayMovieList();
 
-        assertThat(bookList.get(0).getName()+"|"+bookList.get(0).getYearMovie()+"|"+bookList.get(0).getDirector()+"|"+bookList.get(0).getRating()+"\n"+bookList.get(1).getName()+"|"+bookList.get(1).getYearMovie()+"|"+bookList.get(1).getDirector()+"|"+bookList.get(1).getRating()+"\n", is(resultBookList));
+        assertThat(resultBookList, is(movieList.get(0).getTitle()+"|"+movieList.get(0).getYearPublished()+"|"+movieList.get(0).getAuthor()+"|"+movieList.get(0).getRating()+"\n"+movieList.get(1).getTitle()+"|"+movieList.get(1).getYearPublished()+"|"+movieList.get(1).getAuthor()+"|"+movieList.get(1).getRating()+"\n"));
     }
 
 
     @Test
     public void givenAVailableMovieWhenCheckoutTheMovieThenShowSuccessfulMessage(){
-        int codeMovie = 300;
+        int codeCheckedOutMovie = 300;
+        int statusAvailable = 0;
+        library.getMovieList().get(codeCheckedOutMovie).setStatus(statusAvailable);
+        int codeMovie = library.getMovieList().get(codeCheckedOutMovie).getCode();
         String messageCheckedoutBook = "Thank you! Enjoy the movie";
 
         String resultMessageCheckedoutMovie = library.checkoutMovie(codeMovie);
@@ -209,8 +222,10 @@ public class LibraryTest {
 
     @Test
     public void givenAnUnavailableMovieWhenCheckoutTheMovieThenShowUnsuccessfulMessage(){
-        int codeMovie = library.getMovieList().get(300).getCode();
-        library.getMovieList().get(300).setStatus(1);
+        int codeCheckedOutMovie = 300;
+        int statusCheckedOut = 1;
+        int codeMovie = library.getMovieList().get(codeCheckedOutMovie).getCode();
+        library.getMovieList().get(codeCheckedOutMovie).setStatus(statusCheckedOut);
         String messageCheckedoutUnavailableMovie= "Sorry, that movie is not available";
 
         String resultMessageCheckedoutUnavailableMovie = library.checkoutMovie(codeMovie);
@@ -242,22 +257,24 @@ public class LibraryTest {
 
     @Test
     public void givenAnAvailableBookWhenSendValidBookCodeAndValidUserThenCheckoutTheBook(){
-        int bookCode = library.getBookList().get(30).getCode();
-        User user = library.getUserList().get(0);
-        String messageCheckedoutBook = "Thank you! Enjoy the book";
+        int codeCheckedOutBook = 30;
+        int statusCheckedOut = 0;
+        int bookCode = library.getBookList().get(codeCheckedOutBook).getCode();
+        User user = library.getUserList().get(statusCheckedOut);
+        String messageCheckedOutBook = "Thank you! Enjoy the book";
 
         String resultMessageCheckedoutBook = library.checkoutBook(bookCode, user);
 
-        assertThat(messageCheckedoutBook, is(resultMessageCheckedoutBook));
+        assertThat(messageCheckedOutBook, is(resultMessageCheckedoutBook));
     }
 
 
-
-    //////2 funciones
     @Test
     public void givenAnAvailableBookWhenCheckoutTheBookThenAssocciateBookWithCustomer(){
-        library.getBookList().get(30).setStatus(0);
-        int codeBook = library.getBookList().get(30).getCode();
+        int codeCheckedOutBook = 30;
+        int statusCheckedOut = 0;
+        library.getBookList().get(codeCheckedOutBook).setStatus(statusCheckedOut);
+        int codeBook = library.getBookList().get(codeCheckedOutBook).getCode();
         User user = library.getUserList().get(0);
 
         library.checkoutBook(codeBook, user);
