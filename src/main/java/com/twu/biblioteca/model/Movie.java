@@ -39,5 +39,9 @@ public class Movie implements ILibraryItem{
         return this.type;
     }
 
+    @Override
+    public String showInformation() {
+        return this.title+"|"+this.yearPublished+"|"+this.author+"|"+this.rating+"\n";
+    }
 
 }

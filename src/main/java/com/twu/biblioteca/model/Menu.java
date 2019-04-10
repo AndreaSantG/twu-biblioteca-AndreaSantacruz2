@@ -36,12 +36,12 @@ public class Menu {
         int codeMovie;
         switch (optionMenu){
             case 1:
-                selectedOption = library.displayBookList();
+                selectedOption = library.displayAListOfTheSameItems("book");
                 break;
             case 2:
                 utilitarian.print("Please enter the code of book you want to check out");
                 codeBook = Integer.valueOf(utilitarian.read());
-                selectedOption = library.checkoutBook(codeBook, user);
+                selectedOption = library.checkoutLibraryItem(codeBook, user);
                 break;
             case 3:
                 utilitarian.print("Please enter the code of book you want to return");
@@ -49,12 +49,12 @@ public class Menu {
                 selectedOption = library.returnBook(codeBook);
                 break;
             case 4:
-                selectedOption = library.displayMovieList();
+                selectedOption = library.displayAListOfTheSameItems("movie");
                 break;
             case 5:
                 utilitarian.print("Please enter the code of movie you want to check out");
                 codeMovie = Integer.valueOf(utilitarian.read());
-                selectedOption = library.checkoutMovie(codeMovie);
+                selectedOption = library.checkoutLibraryItem(codeMovie, user);
                 break;
             case 6:
                 selectedOption = user.showContactInformation();
