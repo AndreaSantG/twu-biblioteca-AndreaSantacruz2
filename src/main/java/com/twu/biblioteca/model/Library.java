@@ -5,7 +5,6 @@ import java.util.*;
 public class Library {
 
     private Map<Integer, Book> bookHashMap;
-    /*private Map<Integer, Movie> movieHashMap;*/
     private List<User>  userList;
     private Map<Integer, User> ckeckedoutBookList;
     private Map<Integer, ILibraryItem> libraryItemHashMap;
@@ -21,15 +20,10 @@ public class Library {
         bookHashMap.put(50, book3);
         bookHashMap.put(60, book4);
 
-        /*movieHashMap = new LinkedHashMap<>();*/
         Movie movie1 = new Movie("Titanic",  "James Cameron", 1997,0, 300,9);
         Movie movie2 = new Movie("El Rey Leon",  "Rob Minkoff, Roger Allers", 1994,0, 400, 10);
         Movie movie3 = new Movie("Avatar",  "James Cameron", 2009,0, 500, 0);
         Movie movie4 = new Movie("The night knight",  "Christopher Nolan", 2008,0, 600, 8);
-       /* movieHashMap.put(300, movie1);
-        movieHashMap.put(400, movie2);
-        movieHashMap.put(500, movie3);
-        movieHashMap.put(600, movie4);*/
 
         userList = new ArrayList<>();
         User user1 = new User("000-1234","pass1","Carlos","carlos@gmail.com","33434343");
