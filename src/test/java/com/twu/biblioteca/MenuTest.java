@@ -129,27 +129,27 @@ public class MenuTest {
         int ratingMovie1 = 9;
         int statusMovie1 = 0;
         int codeMovie1 = 300;
-        Movie movie1 = new Movie(nameMovie1, yearMovie1, directorMovie1, ratingMovie1, statusMovie1, codeMovie1);
+        Movie movie1 = new Movie(nameMovie1, directorMovie1, yearMovie1, statusMovie1, codeMovie1, ratingMovie1);
         String nameMovie2 = "El Rey Leon";
         int yearMovie2 = 1994;
         String directorMovie2 = "Rob Minkoff, Roger Allers";
         int ratingMovie2 = 10;
         int statusMovie2 = 0;
         int codeMovie2 = 400;
-        Movie movie2 = new Movie(nameMovie2, yearMovie2, directorMovie2, ratingMovie2, statusMovie2, codeMovie2);
+        Movie movie2 = new Movie(nameMovie2, directorMovie2, yearMovie2, statusMovie2, codeMovie2, ratingMovie2);
         String nameMovie3 = "Avatar";
         int yearMovie3 = 2009;
         String directorMovie3 = "James Cameron";
         int ratingMovie3 = 0;
         int statusMovie3 = 0;
         int codeMovie3 = 500;
-        Movie movie3 = new Movie(nameMovie3, yearMovie3, directorMovie3, ratingMovie3, statusMovie3, codeMovie3);
-        List<Movie> bookList = new ArrayList<>(Arrays.asList(movie1, movie2, movie3));
+        Movie movie3 = new Movie(nameMovie3, directorMovie3, yearMovie3, statusMovie3, codeMovie3, ratingMovie3);
+        List<Movie> movieList = new ArrayList<>(Arrays.asList(movie1, movie2, movie3));
         User user = library.getUserList().get(0);
 
         String resultBookList = menu.selectOption(optionMenu, library, user);
 
-        assertThat(bookList.get(0).getName()+"|"+bookList.get(0).getYearMovie()+"|"+bookList.get(0).getDirector()+"|"+bookList.get(0).getRating()+"\n"+bookList.get(1).getName()+"|"+bookList.get(1).getYearMovie()+"|"+bookList.get(1).getDirector()+"|"+bookList.get(1).getRating()+"\n"+bookList.get(2).getName()+"|"+bookList.get(2).getYearMovie()+"|"+bookList.get(2).getDirector()+"|"+bookList.get(2).getRating()+"\n", is(resultBookList));
+        assertThat(resultBookList, is(movieList.get(0).getTitle()+"|"+movieList.get(0).getYearPublished()+"|"+movieList.get(0).getAuthor()+"|"+movieList.get(0).getRating()+"\n"+movieList.get(1).getTitle()+"|"+movieList.get(1).getYearPublished()+"|"+movieList.get(1).getAuthor()+"|"+movieList.get(1).getRating()+"\n"+movieList.get(2).getTitle()+"|"+movieList.get(2).getYearPublished()+"|"+movieList.get(2).getAuthor()+"|"+movieList.get(2).getRating()+"\n"));
     }
 
 

@@ -8,6 +8,7 @@ public class Library {
     private Map<Integer, Movie> movieHashMap;
     private List<User>  userList;
     private Map<Integer, User> ckeckedoutBookList;
+    private Map<Integer, ILibraryItem> libraryItemHashMap;
 
     public Library(){
         bookHashMap = new LinkedHashMap<>();
@@ -21,10 +22,10 @@ public class Library {
         bookHashMap.put(60, book4);
 
         movieHashMap = new LinkedHashMap<>();
-        Movie movie1 = new Movie("Titanic", 1997, "James Cameron", 9, 0, 300);
-        Movie movie2 = new Movie("El Rey Leon", 1994, "Rob Minkoff, Roger Allers", 10, 0, 400);
-        Movie movie3 = new Movie("Avatar", 2009, "James Cameron", 0, 0, 500);
-        Movie movie4 = new Movie("The night knight", 2008, "Christopher Nolan", 8, 0, 600);
+        Movie movie1 = new Movie("Titanic",  "James Cameron", 1997,0, 300,9);
+        Movie movie2 = new Movie("El Rey Leon",  "Rob Minkoff, Roger Allers", 1994,0, 400, 10);
+        Movie movie3 = new Movie("Avatar",  "James Cameron", 2009,0, 500, 0);
+        Movie movie4 = new Movie("The night knight",  "Christopher Nolan", 2008,0, 600, 8);
         movieHashMap.put(300, movie1);
         movieHashMap.put(400, movie2);
         movieHashMap.put(500, movie3);
@@ -37,6 +38,16 @@ public class Library {
         userList.add(user2);
 
         ckeckedoutBookList = new LinkedHashMap<>();
+
+        libraryItemHashMap = new LinkedHashMap<>();
+        libraryItemHashMap.put(30, book1);
+        libraryItemHashMap.put(40, book2);
+        libraryItemHashMap.put(50, book3);
+        libraryItemHashMap.put(60, book4);
+        libraryItemHashMap.put(300, movie1);
+        libraryItemHashMap.put(400, movie2);
+        libraryItemHashMap.put(500, movie3);
+        libraryItemHashMap.put(600, movie4);
     }
 
     public Map<Integer, Book> getBookList() {
@@ -57,8 +68,8 @@ public class Library {
 
     public String displayBookList() {
         String displayAllBooks = "";
-        for(Book book : bookHashMap.values()){
-            if(book.getStatus() == 0){
+        for(ILibraryItem book : libraryItemHashMap.values()){
+            if(book.getStatus() == 0 && book.getType().equals("book")){
              displayAllBooks += formatBookList(book);
             }
         }
@@ -66,18 +77,18 @@ public class Library {
     }
 
 
-    private String formatBookList(Book book){
-        return book.getTitle()+"|"+book.getAuthor()+"|"+book.getYearPublished() + "\n";
+    private String formatBookList(ILibraryItem libraryItem){
+        return libraryItem.getTitle()+"|"+libraryItem.getAuthor()+"|"+libraryItem.getYearPublished() + "\n";
     }
 
 
-    public String checkoutBook(int codeBook, User user) {
-        for(Book book : bookHashMap.values()){
-            if(book.getCode() == codeBook && book.getStatus() == 0){
+    public String checkoutBook(int codeLibraryItem, User user) {
+        for(ILibraryItem book : libraryItemHashMap.values()){
+            if(book.getCode() == codeLibraryItem && book.getStatus() == 0){
                 book.setStatus(1);
                 this.ckeckedoutBookList.put(book.getCode(), user);
                 return "Thank you! Enjoy the book";
-            } else if(book.getCode() == codeBook && book.getStatus() != 0){
+            } else if(book.getCode() == codeLibraryItem && book.getStatus() != 0){
                 return "Sorry, that book is not available"; }
             }
 
@@ -109,16 +120,16 @@ public class Library {
 
 
     private String formatMovieList(Movie movie){
-        return movie.getName()+"|"+movie.getYearMovie()+"|"+movie.getDirector()+"|"+movie.getRating()+"\n";
+        return movie.getTitle()+"|"+movie.getYearPublished()+"|"+movie.getAuthor()+"|"+movie.getRating()+"\n";
     }
 
 
-    public String checkoutMovie(int codeMovie) {
-        for(Movie movie : movieHashMap.values()){
-            if(movie.getCode() == codeMovie && movie.getStatus() == 0){
+    public String checkoutMovie(int codeLibraryItem) {
+        for(ILibraryItem movie : libraryItemHashMap.values()){
+            if(movie.getCode() == codeLibraryItem && movie.getStatus() == 0){
                 movie.setStatus(1);
                 return "Thank you! Enjoy the movie";
-            } else if(movie.getCode() == codeMovie && movie.getStatus() != 0){
+            } else if(movie.getCode() == codeLibraryItem && movie.getStatus() != 0){
                 return "Sorry, that movie is not available"; }
         }
 

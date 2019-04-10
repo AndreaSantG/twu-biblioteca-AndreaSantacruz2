@@ -3,11 +3,7 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.model.Utilitarian;
 import org.junit.Test;
 import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.PowerMockUtils;
-
 import java.util.Scanner;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;

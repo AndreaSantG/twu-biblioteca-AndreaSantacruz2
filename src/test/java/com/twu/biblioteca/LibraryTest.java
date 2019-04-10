@@ -82,7 +82,7 @@ public class LibraryTest {
         String messageCheckedoutBook = "Thank you! Enjoy the book";
         User user = library.getUserList().get(0);
 
-        String resultMessageCheckedoutBook = library.checkoutBook(codBook, user);
+        String resultMessageCheckedoutBook = library.checkoutBook(codeBook, user);
 
         assertThat(messageCheckedoutBook, is(resultMessageCheckedoutBook));
     }
@@ -161,7 +161,7 @@ public class LibraryTest {
         String expectedMessageOptionCheckoutBook = "That is not a valid book to check out";
         User user = library.getUserList().get(0);
 
-        String resultMessageCheckedoutBook = library.checkoutBook(codBook, user);
+        String resultMessageCheckedoutBook = library.checkoutBook(codeBook, user);
 
         assertThat(expectedMessageOptionCheckoutBook, is(resultMessageCheckedoutBook));
     }
@@ -185,15 +185,15 @@ public class LibraryTest {
         int ratingMovie1 = 9;
         int statusMovie1 = 0;
         int codeMovie1 = 300;
-        Movie movie1 = new Movie(nameMovie1, yearMovie1, directorMovie1, ratingMovie1, statusMovie1, codeMovie1);
+        Movie movie1 = new Movie(nameMovie1, directorMovie1, yearMovie1, statusMovie1, codeMovie1, ratingMovie1);
         String nameMovie2 = "El Rey Leon";
         int yearMovie2 = 1994;
         String directorMovie2 = "Rob Minkoff, Roger Allers";
         int ratingMovie2 = 10;
         int statusMovie2 = 0;
         int codeMovie2 = 400;
-        Movie movie2 = new Movie(nameMovie2, yearMovie2, directorMovie2, ratingMovie2, statusMovie2, codeMovie2);
-        List<Movie> bookList = new ArrayList<>(Arrays.asList(movie1, movie2));
+        Movie movie2 = new Movie(nameMovie2, directorMovie2, yearMovie2, statusMovie2, codeMovie2, ratingMovie2);
+        List<Movie> movieList = new ArrayList<>(Arrays.asList(movie1, movie2));
         int codeCheckedOutMovie1 = 500;
         int codeCheckedOutMovie2 = 600;
         int statusCheckedOut = 1;
@@ -202,7 +202,7 @@ public class LibraryTest {
 
         String resultBookList = library.displayMovieList();
 
-        assertThat(bookList.get(0).getName()+"|"+bookList.get(0).getYearMovie()+"|"+bookList.get(0).getDirector()+"|"+bookList.get(0).getRating()+"\n"+bookList.get(1).getName()+"|"+bookList.get(1).getYearMovie()+"|"+bookList.get(1).getDirector()+"|"+bookList.get(1).getRating()+"\n", is(resultBookList));
+        assertThat(resultBookList, is(movieList.get(0).getTitle()+"|"+movieList.get(0).getYearPublished()+"|"+movieList.get(0).getAuthor()+"|"+movieList.get(0).getRating()+"\n"+movieList.get(1).getTitle()+"|"+movieList.get(1).getYearPublished()+"|"+movieList.get(1).getAuthor()+"|"+movieList.get(1).getRating()+"\n"));
     }
 
 
@@ -261,12 +261,13 @@ public class LibraryTest {
         int statusCheckedOut = 0;
         int bookCode = library.getBookList().get(codeCheckedOutBook).getCode();
         User user = library.getUserList().get(statusCheckedOut);
-        String messageCheckedoutBook = "Thank you! Enjoy the book";
+        String messageCheckedOutBook = "Thank you! Enjoy the book";
 
         String resultMessageCheckedoutBook = library.checkoutBook(bookCode, user);
 
-        assertThat(messageCheckedoutBook, is(resultMessageCheckedoutBook));
+        assertThat(messageCheckedOutBook, is(resultMessageCheckedoutBook));
     }
+
 
     @Test
     public void givenAnAvailableBookWhenCheckoutTheBookThenAssocciateBookWithCustomer(){
