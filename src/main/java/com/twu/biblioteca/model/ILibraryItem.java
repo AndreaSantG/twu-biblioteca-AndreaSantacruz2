@@ -10,6 +10,7 @@ public interface ILibraryItem {
     public int getCode();
     public void setStatus(int status);
     public String getType();
+    public String showInformation( );
 
 
 }

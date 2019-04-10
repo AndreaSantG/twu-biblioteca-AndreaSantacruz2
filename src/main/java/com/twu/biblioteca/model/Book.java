@@ -33,4 +33,8 @@ public class Book implements ILibraryItem{
     public String getType() {
         return this.type;
     }
+
+    public String showInformation(){
+        return this.title+"|"+this.author+"|"+this.yearPublished + "\n";
+    }
 }

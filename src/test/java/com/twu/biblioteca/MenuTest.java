@@ -121,7 +121,7 @@ public class MenuTest {
     public void givenMenuIsShownWhenSelectOptionFourThenShouldShowOnlyAvailableMovieList(){
         Menu menu = new Menu();
         Library library = new Library();
-        library.getMovieList().get(600).setStatus(1);
+        library.getLibraryItemList().get(600).setStatus(1);
         int optionMenu = 4;
         String nameMovie1 = "Titanic";
         int yearMovie1 = 1997;
@@ -157,8 +157,8 @@ public class MenuTest {
     public void givenMenuIsShownWhenSelectOptionFiveThenCallCheckoutMovieOption(){
         Library library = new Library();
         Menu menu = new Menu();
-        library.getMovieList().get(300).setStatus(0);
-        String codeMovie = String.valueOf(library.getMovieList().get(300).getCode());
+        library.getLibraryItemList().get(300).setStatus(0);
+        String codeMovie = String.valueOf(library.getLibraryItemList().get(300).getCode());
         int menuOption = 5;
         String expectedMessage = "Thank you! Enjoy the movie";
         Utilitarian utilitarian = mock(Utilitarian.class);
