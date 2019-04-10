@@ -1,5 +1,6 @@
 package com.twu.biblioteca.model;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Menu {
@@ -23,6 +24,8 @@ public class Menu {
         this.menuSix = "(6) View my information\n";
         this.menuZero = "(0) Quit\n";
         utilitarian = new Utilitarian();
+        utilitarian.setScanner(new Scanner(System.in));
+        utilitarian.setOut(System.out);
     }
 
     public String showMenu() {
